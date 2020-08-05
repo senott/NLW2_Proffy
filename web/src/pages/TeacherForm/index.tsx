@@ -4,6 +4,8 @@ import PageHeader from '../../components/PageHeader';
 import './styles.css'
 import Input from '../../components/Input';
 import warningIcon from '../../assets/images/icons/warning.svg'
+import Textarea from '../../components/Textarea';
+import Select from '../../components/Select';
 
 function TeacherForm() {
     return (
@@ -32,14 +34,32 @@ function TeacherForm() {
                         name="whatsapp"
                         label="WhatsApp"
                     />
+
+                    <Textarea
+                        name="bio"
+                        label="Biografia"
+                    />
                 </fieldset>
 
                 <fieldset>
                     <legend>Sobre a aula</legend>
 
-                    <Input 
+                    <Select 
                         name="subject"
                         label="Matéria"
+                        options={[
+                            { value: 'Artes', label: 'Artes'},
+                            { value: 'Biologia', label: 'Biologia' },
+                            { value: 'Ciências', label: 'Ciências' },
+                            { value: 'Física', label: 'Física' },
+                            { value: 'Geografia', label: 'Geografia' },
+                            { value: 'História', label: 'História' },
+                            { value: 'Química', label: 'Química' },
+                            { value: 'Literatura', label: 'Literatura' },
+                            { value: 'Matemática', label: 'Matemática' },
+                            { value: 'Português', label: 'Português' },
+                            { value: 'Inglês', label: 'Inglês' }
+                        ]}
                     />
 
                     <Input
