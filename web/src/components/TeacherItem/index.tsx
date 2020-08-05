@@ -3,33 +3,54 @@ import React from 'react';
 import './styles.css'
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg'
+import api from '../../services/api';
 
-function TeacherItem() {
+export interface Teacher { 
+    id: number
+    name: string
+    avatar: string
+    bio: string
+    cost: number
+    subject: string
+    whatsapp: string
+}
+
+interface TeacherItemProps {
+    teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+
+    function createNewConnection(){ 
+        api.post('connections', {
+            user_id: teacher.id
+        })
+    }
+
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://avatars1.githubusercontent.com/u/2094316?s=460&v=4" alt="Diego Senott" />
+                <img src={teacher.avatar} alt={ teacher.name } />
                 <div>
-                    <strong>Diego Senott</strong>
-                    <span>Física</span>
+                    <strong> { teacher.name }</strong>
+                    <span>{ teacher.subject }</span>
                 </div>
             </header>
 
-            <p>
-                Mussum Ipsum, cacilds vidis litro abertis. Per aumento de cachacis, eu reclamis. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Posuere libero varius. Nullam a nisl ut ante blandit hendrerit. Aenean sit amet nisi. Interagi no mé, cursus quis, vehicula ac nisi.
-                        <br /><br />
-                        Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis. In elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Atirei o pau no gatis, per gatis num morreus.
-                    </p>
+            <p>{ teacher.bio }</p>
 
             <footer>
                 <p>
                     Preço/hora
-                    <strong>R$ 80,00</strong>
+                    <strong>{ teacher.cost }</strong>
                 </p>
-                <button type="button">
+                <a target="_blank" 
+                    href={ `https://wa.me/${ teacher.whatsapp }` } 
+                    onClick={ createNewConnection }
+                    rel="noopener noreferrer">
                     <img src={whatsappIcon} alt="whatsapp" />
                             Entrar em contato
-                        </button>
+                        </a>
             </footer>
         </article>
     )
